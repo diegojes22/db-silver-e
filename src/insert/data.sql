@@ -239,3 +239,91 @@ INSERT INTO productos (nombre, precio, sku, color, marca, descripcion, peso, cat
 ;
 
 END $$ ;
+
+/* 
+            METODOS_PAGO
+*/
+INSERT INTO metodos_pago (nombre, comision) VALUES
+    ('paypal', 3.5),
+    ('pago en efectivo', 0.0),
+    ('oxxo', 3),
+    ('Apple Pay', 30)
+;
+
+/*
+            DOMICILIOS
+Parta consultar y validar si estos registros estan cargados
+ve y ecuta las consultas en `/src/querys/q.sql`
+*/
+
+/* Un domicilio por usuario */
+WITH calles(calle) AS (
+  VALUES
+    ('Av. Insurgentes Sur'), ('Calle Durango'), ('Av. Universidad'),
+    ('Calle Amsterdam'), ('Av. Revolución'), ('Calle Zacatecas'),
+    ('Av. Coyoacán'), ('Calle Orizaba'), ('Av. Patriotismo'),
+    ('Calle Tlaxcala'), ('Av. Chapultepec'), ('Calle Puebla')
+),
+ubicaciones(colonia, cp, ciudad, estado) AS (
+  VALUES
+    ('Roma Norte',        '06700', 'Ciudad de México', 'Ciudad de México'),
+    ('Condesa',           '06140', 'Ciudad de México', 'Ciudad de México'),
+    ('Del Valle Centro',  '03100', 'Ciudad de México', 'Ciudad de México'),
+    ('Narvarte Poniente', '03020', 'Ciudad de México', 'Ciudad de México'),
+    ('Coyoacán Centro',   '04000', 'Ciudad de México', 'Ciudad de México'),
+    ('Polanco',           '11560', 'Ciudad de México', 'Ciudad de México'),
+    ('Nápoles',           '03810', 'Ciudad de México', 'Ciudad de México'),
+    ('Doctores',          '06720', 'Ciudad de México', 'Ciudad de México'),
+    ('Lindavista',        '07300', 'Ciudad de México', 'Ciudad de México'),
+    ('Ciudad Satélite',   '53100', 'Naucalpan',        'Estado de México')
+)
+INSERT INTO public.domicilios (calle, numero, colonia, cp, estado, ciudad, usuarios_id)
+SELECT
+  c.calle,
+  (floor(random() * 999) + 1)::int::text,
+  l.colonia,
+  l.cp,
+  l.estado,
+  l.ciudad,
+  u.id
+FROM public.usuarios u
+CROSS JOIN LATERAL (
+  SELECT calle FROM calles
+  WHERE u.id IS NOT NULL          -- fuerza a re-evaluar por cada usuario
+  ORDER BY random() LIMIT 1
+) c
+CROSS JOIN LATERAL (
+  SELECT * FROM ubicaciones
+  WHERE u.id IS NOT NULL
+  ORDER BY random() LIMIT 1
+) l
+WHERE NOT EXISTS (                -- evita duplicar si lo corres dos veces
+  SELECT 1 FROM public.domicilios d WHERE d.usuarios_id = u.id
+);
+
+/* un segundo domicilio para algunos usuarios */
+WITH calles(calle) AS (
+  VALUES ('Av. Insurgentes Sur'), ('Calle Durango'), ('Av. Universidad'),
+         ('Calle Amsterdam'), ('Av. Revolución'), ('Calle Zacatecas')
+),
+ubicaciones(colonia, cp, ciudad, estado) AS (
+  VALUES
+    ('Roma Norte',   '06700', 'Ciudad de México', 'Ciudad de México'),
+    ('Condesa',      '06140', 'Ciudad de México', 'Ciudad de México'),
+    ('Polanco',      '11560', 'Ciudad de México', 'Ciudad de México'),
+    ('Lindavista',   '07300', 'Ciudad de México', 'Ciudad de México')
+)
+INSERT INTO public.domicilios (calle, numero, colonia, cp, estado, ciudad, usuarios_id)
+SELECT
+  c.calle,
+  (floor(random() * 999) + 1)::int::text,
+  l.colonia, l.cp, l.estado, l.ciudad,
+  u.id
+FROM public.usuarios u
+CROSS JOIN LATERAL (
+  SELECT calle FROM calles WHERE u.id IS NOT NULL ORDER BY random() LIMIT 1
+) c
+CROSS JOIN LATERAL (
+  SELECT * FROM ubicaciones WHERE u.id IS NOT NULL ORDER BY random() LIMIT 1
+) l
+WHERE random() < 0.3;
