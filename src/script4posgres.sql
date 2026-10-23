@@ -9,6 +9,12 @@ Piedad (TecNM).
 
 Este es material con fines educativos cuya fuente original es el Script
 base MySQL. Este Script es exclusivo para bases de datos tipo PostgreSQL
+
+@Note: 
+  A este script de creacion falta agregar cosas como las vistas o los
+  enums que se utilizan en algunas tablas.
+
+Este Script aun esta en construccion . . .
 */
 
 -- WARNING: This schema is for context only and is not meant to be run.
@@ -19,6 +25,7 @@ CREATE TABLE public.categorias (
   nombre character varying NOT NULL,
   CONSTRAINT categorias_pkey PRIMARY KEY (id)
 );
+
 CREATE TABLE public.usuarios (
   id uuid NOT NULL DEFAULT gen_random_uuid(),
   nombre character varying NOT NULL,
@@ -26,21 +33,23 @@ CREATE TABLE public.usuarios (
   telefono character NOT NULL,
   sexo USER-DEFINED NOT NULL,
   fecha_nacimiento date NOT NULL,
-  contrasena character NOT NULL,
+  contrasena character NOT NULL,        /* es necesario ampliar la ongitud de caracteres de este campo para poder guardar un HASH. ATTE: diego */
   fecha_registro timestamp with time zone NOT NULL DEFAULT now(),
   CONSTRAINT usuarios_pkey PRIMARY KEY (id)
 );
+
 CREATE TABLE public.metodos_pago (
   id uuid NOT NULL DEFAULT gen_random_uuid(),
   nombre character varying NOT NULL,
   comision numeric NOT NULL DEFAULT 1.50,
   CONSTRAINT metodos_pago_pkey PRIMARY KEY (id)
 );
+
 CREATE TABLE public.productos (
   id uuid NOT NULL DEFAULT gen_random_uuid(),
   nombre character varying NOT NULL,
   precio numeric NOT NULL,
-  sku character NOT NULL UNIQUE,
+  sku character NOT NULL UNIQUE,      /* recomendable aumentar la longitud de caracteres de este campo a 20 para poder guardar un sku mas largo. ATTE: diego */
   color character varying NOT NULL DEFAULT 'desconocido'::character varying,
   marca character varying NOT NULL,
   descripcion text,
@@ -52,6 +61,7 @@ CREATE TABLE public.productos (
   CONSTRAINT productos_pkey PRIMARY KEY (id),
   CONSTRAINT fk_productos_categorias FOREIGN KEY (categorias_id) REFERENCES public.categorias(id)
 );
+
 CREATE TABLE public.domicilios (
   id uuid NOT NULL DEFAULT gen_random_uuid(),
   calle character varying NOT NULL,
@@ -64,6 +74,7 @@ CREATE TABLE public.domicilios (
   CONSTRAINT domicilios_pkey PRIMARY KEY (id),
   CONSTRAINT fk_domicilios_usuarios FOREIGN KEY (usuarios_id) REFERENCES public.usuarios(id)
 );
+
 CREATE TABLE public.pedidos (
   id uuid NOT NULL DEFAULT gen_random_uuid(),
   fecha timestamp with time zone NOT NULL DEFAULT now(),
@@ -79,6 +90,7 @@ CREATE TABLE public.pedidos (
   CONSTRAINT fk_pedidos_metodos_pago FOREIGN KEY (metodos_pago_id) REFERENCES public.metodos_pago(id),
   CONSTRAINT fk_pedidos_usuarios FOREIGN KEY (usuarios_id) REFERENCES public.usuarios(id)
 );
+
 CREATE TABLE public.detalles_pedido (
   id uuid NOT NULL DEFAULT gen_random_uuid(),
   cantidad smallint NOT NULL CHECK (cantidad > 0),
@@ -89,6 +101,7 @@ CREATE TABLE public.detalles_pedido (
   CONSTRAINT fk_detalles_pedido_pedidos FOREIGN KEY (pedidos_id) REFERENCES public.pedidos(id),
   CONSTRAINT fk_detalles_pedido_productos FOREIGN KEY (productos_id) REFERENCES public.productos(id)
 );
+
 CREATE TABLE public.detalles_carrito (
   id uuid NOT NULL DEFAULT gen_random_uuid(),
   cantidad smallint NOT NULL DEFAULT 1 CHECK (cantidad >= 0),
@@ -99,6 +112,7 @@ CREATE TABLE public.detalles_carrito (
   CONSTRAINT fk_detalles_carrito_productos FOREIGN KEY (productos_id) REFERENCES public.productos(id),
   CONSTRAINT fk_detalles_carrito_usuarios FOREIGN KEY (usuarios_id) REFERENCES public.usuarios(id)
 );
+
 CREATE TABLE public.envios (
   id uuid NOT NULL DEFAULT gen_random_uuid(),
   fecha_entrega timestamp with time zone,
