@@ -12,10 +12,13 @@ entidades relacionadas con los prodocutos y sus catgorias se relacionan
 con dicha tematica.
 
 @Importante
-Ninguno de los datos aqui presentes es real, todos los registros son
-datos inventados (dummy) empleados en la validacion del modelo.
+  Ninguno de los datos aqui presentes es real, todos los registros son
+  datos inventados (dummy) empleados en la validacion del modelo.
 
-Este Script aun esta en construccion . . .
+Este Script es mas autogenerado y sirve para realizar pruebas de forma
+rapida. Se recomienda utilizar `./data2.sql` ya que el control y
+consistencia de los datos precisa, lo que lo vuelve perfecto para pruebas
+detalladas y validacion del modelo.
 */
 
 /*

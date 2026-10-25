@@ -8,6 +8,9 @@ profesor Heriberto Flores Chavez en el Instituto Tecnologico de la
 Piedad (TecNM).
 
 Este es material con fines educativos
+
+@Importante:
+  No modificar este Script!
 */
 
 /*!40101 SET NAMES utf8 */;

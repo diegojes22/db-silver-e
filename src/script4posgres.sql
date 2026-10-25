@@ -10,16 +10,25 @@ Piedad (TecNM).
 Este es material con fines educativos cuya fuente original es el Script
 base MySQL. Este Script es exclusivo para bases de datos tipo PostgreSQL
 
-@Note: 
-  A este script de creacion falta agregar cosas como las vistas o los
-  enums que se utilizan en algunas tablas.
+Crear la DB en una instancia local: 
+  Para cargar este Script en una instancia local de PostgreSQL es necsario
+  crear una base de datos local dentro de PostgreSQL. Tras esto y antes de
+  ejecutar el script, cambia el nombre `public` de todas las tablas por el
+  nombre de la DB creada. Para esto usa el archivo `src/tmp.sql` y una vez
+  este echo carga dicho Script a PostgreSQL y ejecutalo; debe funcionar
+  correctamente.
 
-Este Script aun esta en construccion . . .
+@Nota:
+  Queda pendiente ajustar los tipos de datos de la DB en base a los tipos
+  de datos en el Script original para MySQL
+  ATTE: diego. 25 oct 26 23:00
 */
 
--- WARNING: This schema is for context only and is not meant to be run.
--- Table order and constraints may not be valid for execution.
+/* Crear enums */
+CREATE TYPE estados_envios AS ENUM ('PENDIENTE', 'EN_TRANSITO', 'ENTREGADO', 'CANCELADO');
+CREATE TYPE generos AS ENUM ('MASCULINO', 'FEMENINO', 'NO_BINARIE');                        -- Espero que esto no genere polemica >:/
 
+/* Crear entidades fuertes */
 CREATE TABLE public.categorias (
   id uuid NOT NULL DEFAULT gen_random_uuid(),
   nombre character varying NOT NULL,
@@ -28,12 +37,12 @@ CREATE TABLE public.categorias (
 
 CREATE TABLE public.usuarios (
   id uuid NOT NULL DEFAULT gen_random_uuid(),
-  nombre character varying NOT NULL,
+  nombre VARCHAR(60) varying NOT NULL,
   email character varying NOT NULL UNIQUE,
   telefono character NOT NULL,
   sexo USER-DEFINED NOT NULL,
   fecha_nacimiento date NOT NULL,
-  contrasena character NOT NULL,        /* es necesario ampliar la ongitud de caracteres de este campo para poder guardar un HASH. ATTE: diego */
+  contrasena VARCHAR(64) NOT NULL,        
   fecha_registro timestamp with time zone NOT NULL DEFAULT now(),
   CONSTRAINT usuarios_pkey PRIMARY KEY (id)
 );
@@ -41,15 +50,16 @@ CREATE TABLE public.usuarios (
 CREATE TABLE public.metodos_pago (
   id uuid NOT NULL DEFAULT gen_random_uuid(),
   nombre character varying NOT NULL,
-  comision numeric NOT NULL DEFAULT 1.50,
+  comision numeric NOT NULL DEFAULT 1.50,       -- La comision esta en porcentaje, con valores de 0 a 100
   CONSTRAINT metodos_pago_pkey PRIMARY KEY (id)
 );
 
+/* Crear entidades debiles */
 CREATE TABLE public.productos (
   id uuid NOT NULL DEFAULT gen_random_uuid(),
   nombre character varying NOT NULL,
   precio numeric NOT NULL,
-  sku character NOT NULL UNIQUE,      /* recomendable aumentar la longitud de caracteres de este campo a 20 para poder guardar un sku mas largo. ATTE: diego */
+  sku VARCHAR(15) NOT NULL UNIQUE,
   color character varying NOT NULL DEFAULT 'desconocido'::character varying,
   marca character varying NOT NULL,
   descripcion text,
@@ -75,6 +85,7 @@ CREATE TABLE public.domicilios (
   CONSTRAINT fk_domicilios_usuarios FOREIGN KEY (usuarios_id) REFERENCES public.usuarios(id)
 );
 
+/* Entidades debiles con mayor actividad */
 CREATE TABLE public.pedidos (
   id uuid NOT NULL DEFAULT gen_random_uuid(),
   fecha timestamp with time zone NOT NULL DEFAULT now(),
@@ -84,8 +95,8 @@ CREATE TABLE public.pedidos (
   usuarios_id uuid NOT NULL,
   metodos_pago_id uuid NOT NULL,
   fecha_hora_pago timestamp with time zone,
-  importe_iva numeric DEFAULT round((importe_productos * 0.16), 2),
-  total numeric DEFAULT ((importe_productos + importe_envio) + round((importe_productos * 0.16), 2)),
+  importe_iva numeric GENERATED ALWAYS AS (round(importe_productos * 0.16, 2)) STORED,                                  -- esto fue cambiado para evitar errores al replicar la DB en Posgres
+  total numeric GENERATED ALWAYS AS (importe_productos + importe_envio + round(importe_productos * 0.16, 2)) STORED,    -- aqui tambien . . .
   CONSTRAINT pedidos_pkey PRIMARY KEY (id),
   CONSTRAINT fk_pedidos_metodos_pago FOREIGN KEY (metodos_pago_id) REFERENCES public.metodos_pago(id),
   CONSTRAINT fk_pedidos_usuarios FOREIGN KEY (usuarios_id) REFERENCES public.usuarios(id)
@@ -125,3 +136,13 @@ CREATE TABLE public.envios (
   CONSTRAINT fk_envios_domicilios FOREIGN KEY (domicilios_id) REFERENCES public.domicilios(id),
   CONSTRAINT fk_envios_pedidos FOREIGN KEY (pedidos_id) REFERENCES public.pedidos(id)
 );
+
+/*
+  Si llegaste hasta aqui es necesario mencionar las unidades empleadas 
+  para la base de datos:
+  1. Los precios se manejan en pesos mexicanos.
+  2. el peso de los productos se maneja en kilogramos.
+  3. las medidas de los productos (ancho, alto y profundidad) estan en metros.
+
+  En general, la base de datos esta pensada para una app en Mexico.
+*/

@@ -13,25 +13,27 @@ entidades relacionadas con los prodocutos y sus catgorias se relacionan
 con dicha tematica.
 
 @Importante
-Ninguno de los datos aqui presentes es real, todos los registros son
-datos inventados (dummy) empleados en la validacion del modelo.
+    Ninguno de los datos aqui presentes es real, todos los registros son
+    datos inventados (dummy) empleados en la validacion del modelo.
+
+Usa este Script para realizar una validacion a detalle del modelo.
 */
 
 /*  
     Usuarios  
 */
 INSERT INTO usuarios (id, nombre, email, telefono, sexo, fecha_nacimiento, contrasena) VALUES
-    ('9170894f-691d-4590-b46b-e1d2f6ca0a80', 'Gerardo Vargas Díaz',     'gerardo.diaz@outlook.com',         '5554016400', 'H', '1989-12-03', '1234'),
-    ('9170894f-691d-4590-b46b-e1d2f6ca0a81', 'Héctor Cruz Jiménez',     'hcruz39@email.com',                '5558240084', 'H', '1971-04-30', '1234'),
-    ('9170894f-691d-4590-b46b-e1d2f6ca0a82', 'Carmen Cortés Vargas',    'carmencortes54@outlook.com',       '5551657262', 'M', '2006-10-22', '1234'),
-    ('9170894f-691d-4590-b46b-e1d2f6ca0a83', 'Valeria Herrera Salazar', 'valeria_herrera54@gmail.com',      '5553815614', 'M', '2003-08-28', '1234'),
-    ('9170894f-691d-4590-b46b-e1d2f6ca0a84', 'Marta Sánchez González',  'marta.gonzalez@hotmail.com',       '5558148932', 'M', '1993-07-18', '1234'),
-    ('9170894f-691d-4590-b46b-e1d2f6ca0a85', 'Jorge Morales Romero',    'jorge_morales72@hotmail.com',      '5557770143', 'H', '1996-04-12', '1234'),
-    ('9170894f-691d-4590-b46b-e1d2f6ca0a86', 'Andrés Reyes Navarrete',  'reyesN12@hotmail.com',             '5553289900', 'H', '1989-11-03', '1234'),
-    ('9170894f-691d-4590-b46b-e1d2f6ca0a87', 'Laura Sánchez Rodríguez', 'laura.rodriguez@hotmail.com',      '5551034131', 'M', '1994-02-06', '1234'),
-    ('9170894f-691d-4590-b46b-e1d2f6ca0a88', 'Gerardo Flores Ramos',    'gerardoflores71@outlook.com',      '5551317127', 'H', '1986-03-08', '1234'),
-    ('9170894f-691d-4590-b46b-e1d2f6ca0a89', 'Andrea Cruz Hernández',   'andrea_cruz90@gmail.com',          '5556120047', 'M', '1970-06-02', '1234'),
-    ('9170894f-691d-4590-b46b-e1d2f6ca0a8A', 'Fernando Martínez Pérez', 'fernandomartinez88@email.com',     '5558451462', 'H', '2000-09-14', '1234')
+    ('9170894f-691d-4590-b46b-e1d2f6ca0a80', 'Gerardo Vargas Díaz',     'gerardo.diaz@outlook.com',         '5554016400', 'H', '1989-12-03', 'f4f62f839ac969cc9df51d91abbda0f4498f09aaf68e1eefd18c96a302e3d851'),
+    ('9170894f-691d-4590-b46b-e1d2f6ca0a81', 'Héctor Cruz Jiménez',     'hcruz39@email.com',                '5558240084', 'H', '1971-04-30', 'eaa0164dd40927193f692469b35befd4a64bbd7a6045f8c1f7758d4095aec3a7'),
+    ('9170894f-691d-4590-b46b-e1d2f6ca0a82', 'Carmen Cortés Vargas',    'carmencortes54@outlook.com',       '5551657262', 'M', '2006-10-22', '4486ef82d00ec066301adb310969525835c3696112c350cc52a8f2a8fb567ff6'),
+    ('9170894f-691d-4590-b46b-e1d2f6ca0a83', 'Valeria Herrera Salazar', 'valeria_herrera54@gmail.com',      '5553815614', 'M', '2003-08-28', '4bd2846548d5acb5668266f05097c903de04c414b7ace4e51dcc9a72671eae6e'),
+    ('9170894f-691d-4590-b46b-e1d2f6ca0a84', 'Marta Sánchez González',  'marta.gonzalez@hotmail.com',       '5558148932', 'M', '1993-07-18', 'f4f62f839ac969cc9df51d91abbda0f4498f09aaf68e1eefd18c96a302e3d851'),
+    ('9170894f-691d-4590-b46b-e1d2f6ca0a85', 'Jorge Morales Romero',    'jorge_morales72@hotmail.com',      '5557770143', 'H', '1996-04-12', '183c92f4dbcbf1c5ee0bc9961080735a7ef6670f457a5e110ef416cbdc80f3a7'),
+    ('9170894f-691d-4590-b46b-e1d2f6ca0a86', 'Andrés Reyes Navarrete',  'reyesN12@hotmail.com',             '5553289900', 'H', '1989-11-03', 'f4f62f839ac969cc9df51d91abbda0f4498f09aaf68e1eefd18c96a302e3d851'),
+    ('9170894f-691d-4590-b46b-e1d2f6ca0a87', 'Laura Sánchez Rodríguez', 'laura.rodriguez@hotmail.com',      '5551034131', 'M', '1994-02-06', 'f4f62f839ac969cc9df51d91abbda0f4498f09aaf68e1eefd18c96a302e3d851'),
+    ('9170894f-691d-4590-b46b-e1d2f6ca0a88', 'Gerardo Flores Ramos',    'gerardoflores71@outlook.com',      '5551317127', 'H', '1986-03-08', 'f4f62f839ac969cc9df51d91abbda0f4498f09aaf68e1eefd18c96a302e3d851'),
+    ('9170894f-691d-4590-b46b-e1d2f6ca0a89', 'Andrea Cruz Hernández',   'andrea_cruz90@gmail.com',          '5556120047', 'M', '1970-06-02', 'f4f62f839ac969cc9df51d91abbda0f4498f09aaf68e1eefd18c96a302e3d851'),
+    ('9170894f-691d-4590-b46b-e1d2f6ca0a8A', 'Fernando Martínez Pérez', 'fernandomartinez88@email.com',     '5558451462', 'H', '2000-09-14', '183c92f4dbcbf1c5ee0bc9961080735a7ef6670f457a5e110ef416cbdc80f3a7')
 ;
 
 /*  
@@ -98,3 +100,25 @@ INSERT INTO metodos_pago (id, nombre, comision) VALUES
     ('f9ead6e0-d81d-4e8d-8c55-f52f479f8ad5', 'tarjeta de crédito',  2.9),
     ('f9ead6e0-d81d-4e8d-8c55-f52f479f8ad6', 'transferencia SPEI',  0.0),
     ('f9ead6e0-d81d-4e8d-8c55-f52f479f8ad7', 'tarjeta de débito',   1.5);
+
+/*
+    Domicilios de los usuarios
+*/
+INSERT INTO domicilios (id, calle, colonia, cp, ciudad, estado, usuarios_id) VALUES
+    ('0d596de4-f3a7-4989-8ec7-f7d2d11b3120', 'Matamoros',           'Centro',               '59300', 'La Piedad',   'Michoacán',    '9170894f-691d-4590-b46b-e1d2f6ca0a80'),
+    ('0d596de4-f3a7-4989-8ec7-f7d2d11b3121', 'Uruapan',             'Vasco de Quiroga',     '59380', 'La Piedad',   'Michoacán',    '9170894f-691d-4590-b46b-e1d2f6ca0a80'),
+    ('0d596de4-f3a7-4989-8ec7-f7d2d11b3122', 'Vicente Guerrero',    'Los Ocotes',           '36933', 'Pénjamo',     'Guanajuato',   '9170894f-691d-4590-b46b-e1d2f6ca0a81'),
+    ('0d596de4-f3a7-4989-8ec7-f7d2d11b3123', 'Margaritas',          'Las Barranquillas',    '59426', 'La Piedad',   'Michoacán',    '9170894f-691d-4590-b46b-e1d2f6ca0a82'),
+    ('0d596de4-f3a7-4989-8ec7-f7d2d11b3124', 'Veneto',              'Dos Plazas',           '59393', 'La Piedad',   'Michoacán',    '9170894f-691d-4590-b46b-e1d2f6ca0a83'),
+    ('0d596de4-f3a7-4989-8ec7-f7d2d11b3125', 'Mariano Bárcena',     'Centro',               '44200', 'Guadalajara', 'Jalisco',      '9170894f-691d-4590-b46b-e1d2f6ca0a84'),
+    ('0d596de4-f3a7-4989-8ec7-f7d2d11b3126', 'Francisco I. Madero', 'Centro',               '59300', 'La Piedad',   'Michoacán',    '9170894f-691d-4590-b46b-e1d2f6ca0a85'),
+    ('0d596de4-f3a7-4989-8ec7-f7d2d11b3127', 'Juárez',              'San Rafael',           '59370', 'La Piedad',   'Michoacán',    '9170894f-691d-4590-b46b-e1d2f6ca0a85'),
+    ('0d596de4-f3a7-4989-8ec7-f7d2d11b3128', 'Hidalgo',             'Centro',               '36900', 'Pénjamo',     'Guanajuato',   '9170894f-691d-4590-b46b-e1d2f6ca0a86'),
+    ('0d596de4-f3a7-4989-8ec7-f7d2d11b3129', 'Morelos',             'Las Colonias',         '36905', 'Pénjamo',     'Guanajuato',   '9170894f-691d-4590-b46b-e1d2f6ca0a86'),
+    ('0d596de4-f3a7-4989-8ec7-f7d2d11b3130', 'Allende',             'Centro',               '59300', 'La Piedad',   'Michoacán',    '9170894f-691d-4590-b46b-e1d2f6ca0a87'),
+    ('0d596de4-f3a7-4989-8ec7-f7d2d11b3131', 'Zaragoza',            'Jardines del Carmen',  '59389', 'La Piedad',   'Michoacán',    '9170894f-691d-4590-b46b-e1d2f6ca0a88'),
+    ('0d596de4-f3a7-4989-8ec7-f7d2d11b3132', 'Reforma',             'Centro',               '44100', 'Guadalajara', 'Jalisco',      '9170894f-691d-4590-b46b-e1d2f6ca0a88'),
+    ('0d596de4-f3a7-4989-8ec7-f7d2d11b3133', 'Insurgentes',         'Centro',               '59300', 'La Piedad',   'Michoacán',    '9170894f-691d-4590-b46b-e1d2f6ca0a89'),
+    ('0d596de4-f3a7-4989-8ec7-f7d2d11b3134', 'Lázaro Cárdenas',     'Las Fuentes',          '59340', 'La Piedad',   'Michoacán',    '9170894f-691d-4590-b46b-e1d2f6ca0a89'),
+    ('0d596de4-f3a7-4989-8ec7-f7d2d11b3135', 'Miguel Hidalgo',      'Centro',               '36900', 'Pénjamo',     'Guanajuato',   '9170894f-691d-4590-b46b-e1d2f6ca0a8A'),
+    ('0d596de4-f3a7-4989-8ec7-f7d2d11b3136', '5 de Mayo',           'San Miguel',           '36910', 'Pénjamo',     'Guanajuato',   '9170894f-691d-4590-b46b-e1d2f6ca0a8A');
