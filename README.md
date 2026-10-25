@@ -36,6 +36,12 @@ Para realizar validacion del modelo, pruebas, cambios u otra accion primero debe
 > **@Recordatorio**
 > Para acceder al proyecto alojado en **Supabase** se debe solicitar acceso al administrador correspondiente.
 
+### Recomendaciones para realizar un commit
+Para poder realizar un commit y un porterior **git push** se recomienda la siguiente estructura
+```
+git commit -m '<descripcion muy breve del cambio> . <fecha del cambio usando numeros>'
+```
+
 ## Estructura del repositorio
 ```
 ./
@@ -45,7 +51,6 @@ Para realizar validacion del modelo, pruebas, cambios u otra accion primero debe
     insert/         # Insercion de registros e informacion en la DB
     querys/         # Consultas de validacion
 ```
-
 
 ## Sobre este trabajo
 Este proyecto se desarrolla en el marco de una actividad académica correspondiente a la asignatura de Backend del **[Instituto Tecnológico de La Piedad](https://piedad.tecnm.mx/)**, como parte de la formación universitaria en **Ingeniería en Sistemas Computacionales**.
