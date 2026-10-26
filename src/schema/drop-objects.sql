@@ -1,6 +1,5 @@
-
 /*
-
+Usa este Script por partes y solo en uns instancia de postgres local.
 */
 -- Eliminacion de tablas (de las mas debiles a las mas fuertes)
 DROP TABLE detalles_carrito;
