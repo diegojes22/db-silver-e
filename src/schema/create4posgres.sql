@@ -113,7 +113,7 @@ ya que un usuario puede tener n domicilios
 CREATE TABLE public.domicilios (
   id uuid NOT NULL DEFAULT gen_random_uuid(),
   calle VARCHAR(50) NOT NULL,
-  numero varchar(10) varying NOT NULL,
+  numero varchar(10) NOT NULL,
   colonia VARCHAR(30) NOT NULL,
   cp VARCHAR(5) NOT NULL,
   estado VARCHAR(21) NOT NULL,

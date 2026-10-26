@@ -1,9 +1,7 @@
-/* 
-Luego nombrare este archivo a algo mas especifico,
-solo lo hice para guardar las consultas que validan
-los domicilios de los usuarios
+/*
+    Consultas de domicilios
 */
--- domicilios de un usuario
+-- domicilios de los usuarios
 SELECT
     usr.nombre,
     usr.email,
@@ -26,20 +24,28 @@ JOIN domicilios dom ON usr.id = dom.usuarios_id
 WHERE usr.nombre LIKE 'Marta Sánchez González';
 
 -- Usuarios sin domicilio
-SELECT u.id, u.nombre
+SELECT 
+    u.id, 
+    u.nombre,
+    u.email
 FROM public.usuarios u
 LEFT JOIN public.domicilios d ON d.usuarios_id = u.id
 WHERE d.id IS NULL;
 
--- Domicilios por usuario
-SELECT u.nombre, count(*) AS total
+-- Cantidad de domicilios registrados por un usuario
+SELECT 
+    u.nombre, 
+    COUNT(d.id) AS total
 FROM public.usuarios u
-JOIN public.domicilios d ON d.usuarios_id = u.id
+LEFT JOIN public.domicilios d ON d.usuarios_id = u.id
 GROUP BY u.nombre
 ORDER BY total DESC;
 
+/*
+    Consultas sobre los pedidos
+*/
 
--- Lista de pedidos
+-- Lista de pedidos realizados
 SELECT 
     usr.nombre,
     usr.telefono,
@@ -65,3 +71,67 @@ FROM pedidos pd
 JOIN detalles_pedido dpd ON pd.id = dpd.pedidos_id
 JOIN productos pro ON pro.id = dpd.productos_id
 WHERE pd.id = 'a81396a1-7ff9-470b-b82d-a3bfaf7fae70';
+
+-- Envios entregados
+SELECT 
+    u.nombre,
+    u.email,
+    d.numero,
+    d.calle,
+    d.colonia,
+    d.ciudad,
+    d.cp,
+    en.numero_seguimiento,
+    p.total,
+    en.fecha_entrega
+FROM pedidos p
+JOIN envios en ON p.id = en.pedidos_id
+JOIN domicilios d ON d.id = en.domicilios_id
+JOIN usuarios u ON u.id = d.usuarios_id
+WHERE en.estado = 'ENTREGADO'
+;
+
+/*
+    Consultas del carrito
+*/
+-- Productos que un usuario tiene en el carrito
+SELECT
+    car.cantidad,    
+    p.nombre,
+    p.precio AS precio_unitario,
+    (car.cantidad * p.precio) AS importe
+FROM usuarios u
+JOIN detalles_carrito car ON u.id = car.usuarios_id
+JOIN productos p ON p.id = car.productos_id
+WHERE u.nombre LIKE 'Laura Sánchez Rodríguez';
+
+-- Total a pagar en los carritos de los usuarios
+SELECT
+    u.nombre,
+    SUM(car.cantidad) AS cantidad_productos,
+    SUM(p.precio * car.cantidad) AS importe
+FROM usuarios u
+JOIN detalles_carrito car ON u.id = car.usuarios_id
+JOIN productos p ON p.id = car.productos_id
+GROUP BY u.nombre
+;
+
+-- Productos mas agregados en el carrito
+SELECT
+    p.nombre,
+    SUM(car.cantidad) AS cantidad
+FROM productos p
+JOIN detalles_carrito car ON p.id = car.productos_id
+GROUP BY p.nombre
+ORDER BY cantidad DESC
+;
+
+-- productos que no han sido agregados ningun carrito
+SELECT
+    p.nombre
+FROM productos p
+LEFT JOIN detalles_carrito car ON p.id = car.productos_id
+WHERE car.id IS NULL
+GROUP BY p.nombre
+ORDER BY cantidad DESC
+;
