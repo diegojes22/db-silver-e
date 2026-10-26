@@ -260,3 +260,118 @@ INSERT INTO detalles_pedido (cantidad, precio, productos_id, pedidos_id) VALUES
 INSERT INTO envios (fecha, fecha_entrega, estado, numero_seguimiento, domicilios_id, pedidos_id) VALUES
     ('2026-10-02 17:10:00-01', '2026-10-05 12:39:05-01', 'ENTREGADO', '17877991805734474338', '0d596de4-f3a7-4989-8ec7-f7d2d11b3128', 'a81396a1-7ff9-470b-b82d-a3bfaf7fae72')
 ;
+
+
+/* Envios, pedidos y detallas pedidos generados de forma automatizada */
+/*
+    pedidos
+*/
+INSERT INTO pedidos (id, fecha, importe_productos, importe_envio, fecha_hora_pago, metodos_pago_id, usuarios_id) VALUES
+    -- Jorge Morales Romero | tarjeta de debito
+    ('a81396a1-7ff9-470b-b82d-a3bfaf7fae73', '2026-10-03 11:42:18-06',  1328.00,  59, '2026-10-03 11:43:05-06', 'f9ead6e0-d81d-4e8d-8c55-f52f479f8ad7', '9170894f-691d-4590-b46b-e1d2f6ca0a85'),
+    -- Fernando Martinez Perez | oxxo (pago al dia siguiente)
+    ('a81396a1-7ff9-470b-b82d-a3bfaf7fae74', '2026-10-06 19:22:40-06',  1033.00,  59, '2026-10-07 12:05:11-06', 'f9ead6e0-d81d-4e8d-8c55-f52f479f8ad3', '9170894f-691d-4590-b46b-e1d2f6ca0a8A'),
+    -- Gerardo Flores Ramos | tarjeta de credito
+    ('a81396a1-7ff9-470b-b82d-a3bfaf7fae75', '2026-10-09 20:14:33-06',  1024.95,  59, '2026-10-09 20:14:51-06', 'f9ead6e0-d81d-4e8d-8c55-f52f479f8ad5', '9170894f-691d-4590-b46b-e1d2f6ca0a88'),
+    -- Valeria Herrera Salazar | tarjeta de credito
+    ('a81396a1-7ff9-470b-b82d-a3bfaf7fae76', '2026-10-12 14:03:27-06', 32999.00,  99, '2026-10-12 14:04:10-06', 'f9ead6e0-d81d-4e8d-8c55-f52f479f8ad5', '9170894f-691d-4590-b46b-e1d2f6ca0a83'),
+    -- Carmen Cortes Vargas | transferencia SPEI
+    ('a81396a1-7ff9-470b-b82d-a3bfaf7fae77', '2026-10-14 10:51:02-06', 15124.99,  99, '2026-10-14 10:58:44-06', 'f9ead6e0-d81d-4e8d-8c55-f52f479f8ad6', '9170894f-691d-4590-b46b-e1d2f6ca0a82'),
+    -- Andres Reyes Navarrete | oxxo, nunca se pago (pedido cancelado)
+    ('a81396a1-7ff9-470b-b82d-a3bfaf7fae78', '2026-10-15 16:48:09-06', 15399.00,  99, NULL,                      'f9ead6e0-d81d-4e8d-8c55-f52f479f8ad3', '9170894f-691d-4590-b46b-e1d2f6ca0a86'),
+    -- Gerardo Vargas Diaz | paypal
+    ('a81396a1-7ff9-470b-b82d-a3bfaf7fae79', '2026-10-17 15:20:44-06',   714.00,  59, '2026-10-17 15:21:30-06', 'f9ead6e0-d81d-4e8d-8c55-f52f479f8ad1', '9170894f-691d-4590-b46b-e1d2f6ca0a80'),
+    -- Laura Sanchez Rodriguez | paypal
+    ('a81396a1-7ff9-470b-b82d-a3bfaf7fae7a', '2026-10-19 18:36:12-06', 31999.00,  99, '2026-10-19 18:37:01-06', 'f9ead6e0-d81d-4e8d-8c55-f52f479f8ad1', '9170894f-691d-4590-b46b-e1d2f6ca0a87'),
+    -- Hector Cruz Jimenez | pago en efectivo (contra entrega, aun sin pagar)
+    ('a81396a1-7ff9-470b-b82d-a3bfaf7fae7b', '2026-10-21 09:25:50-06',  3570.00,  99, NULL,                      'f9ead6e0-d81d-4e8d-8c55-f52f479f8ad2', '9170894f-691d-4590-b46b-e1d2f6ca0a81'),
+    -- Andrea Cruz Hernandez | tarjeta de credito
+    ('a81396a1-7ff9-470b-b82d-a3bfaf7fae7c', '2026-10-23 21:12:09-06', 47999.00,  99, '2026-10-23 21:13:30-06', 'f9ead6e0-d81d-4e8d-8c55-f52f479f8ad5', '9170894f-691d-4590-b46b-e1d2f6ca0a89'),
+    -- Marta Sanchez Gonzalez | tarjeta de debito
+    ('a81396a1-7ff9-470b-b82d-a3bfaf7fae7d', '2026-10-24 12:40:17-06', 15399.00,  99, '2026-10-24 12:41:02-06', 'f9ead6e0-d81d-4e8d-8c55-f52f479f8ad7', '9170894f-691d-4590-b46b-e1d2f6ca0a84')
+;
+ 
+/*
+    detalles_pedido
+*/
+INSERT INTO detalles_pedido (id, cantidad, precio, productos_id, pedidos_id) VALUES
+    -- fae73 | Jorge Morales Romero (total productos: 1328.00)
+    ('944a49f1-f1c0-41e7-a432-a2f7973ca684', 10,   15.00, 'e20c3e29-8faf-4bd3-afa7-a3b295b965d1', 'a81396a1-7ff9-470b-b82d-a3bfaf7fae73'),  -- LED rojo
+    ('944a49f1-f1c0-41e7-a432-a2f7973ca685', 10,   15.00, 'e20c3e29-8faf-4bd3-afa7-a3b295b965d2', 'a81396a1-7ff9-470b-b82d-a3bfaf7fae73'),  -- LED verde
+    ('944a49f1-f1c0-41e7-a432-a2f7973ca686',  2,  856.00, '8306300e-9b9b-4e59-bb79-fc394e566cf3', 'a81396a1-7ff9-470b-b82d-a3bfaf7fae73'),  -- Arduino UNO
+    ('944a49f1-f1c0-41e7-a432-a2f7973ca687',  1,   75.00, 'e20c3e29-8faf-4bd3-afa7-a3b295b965d0', 'a81396a1-7ff9-470b-b82d-a3bfaf7fae73'),  -- Kit cables Dupont
+    ('944a49f1-f1c0-41e7-a432-a2f7973ca688',  2,  178.00, 'e20c3e29-8faf-4bd3-afa7-a3b295b965cf', 'a81396a1-7ff9-470b-b82d-a3bfaf7fae73'),  -- Protoboard 830
+    ('944a49f1-f1c0-41e7-a432-a2f7973ca689',  1,  189.00, 'e20c3e29-8faf-4bd3-afa7-a3b295b965cc', 'a81396a1-7ff9-470b-b82d-a3bfaf7fae73'),  -- Kit 600 resistencias
+ 
+    -- fae74 | Fernando Martinez Perez (total productos: 1033.00)
+    ('944a49f1-f1c0-41e7-a432-a2f7973ca68a',  1,  357.00, '8306300e-9b9b-4e59-bb79-fc394e566cf2', 'a81396a1-7ff9-470b-b82d-a3bfaf7fae74'),  -- ESP32
+    ('944a49f1-f1c0-41e7-a432-a2f7973ca68b',  1,   55.00, 'e20c3e29-8faf-4bd3-afa7-a3b295b965dd', 'a81396a1-7ff9-470b-b82d-a3bfaf7fae74'),  -- RFID RC522
+    ('944a49f1-f1c0-41e7-a432-a2f7973ca68c',  1,   65.00, 'e20c3e29-8faf-4bd3-afa7-a3b295b965dc', 'a81396a1-7ff9-470b-b82d-a3bfaf7fae74'),  -- LCD 1602 I2C
+    ('944a49f1-f1c0-41e7-a432-a2f7973ca68d',  2,   50.00, 'e20c3e29-8faf-4bd3-afa7-a3b295b965da', 'a81396a1-7ff9-470b-b82d-a3bfaf7fae74'),  -- Modulo rele 5V
+    ('944a49f1-f1c0-41e7-a432-a2f7973ca68e',  3,  105.00, 'e20c3e29-8faf-4bd3-afa7-a3b295b965d9', 'a81396a1-7ff9-470b-b82d-a3bfaf7fae74'),  -- Sensor LM35
+    ('944a49f1-f1c0-41e7-a432-a2f7973ca68f',  4,  100.00, 'e20c3e29-8faf-4bd3-afa7-a3b295b965d5', 'a81396a1-7ff9-470b-b82d-a3bfaf7fae74'),  -- MOSFET IRFZ44N
+    ('944a49f1-f1c0-41e7-a432-a2f7973ca690',  2,   16.00, 'e20c3e29-8faf-4bd3-afa7-a3b295b965d8', 'a81396a1-7ff9-470b-b82d-a3bfaf7fae74'),  -- Regulador LM7805
+    ('944a49f1-f1c0-41e7-a432-a2f7973ca691',  5,   60.00, 'e20c3e29-8faf-4bd3-afa7-a3b295b965d6', 'a81396a1-7ff9-470b-b82d-a3bfaf7fae74'),  -- Potenciometro 10K
+    ('944a49f1-f1c0-41e7-a432-a2f7973ca692', 10,  200.00, 'e20c3e29-8faf-4bd3-afa7-a3b295b965cd', 'a81396a1-7ff9-470b-b82d-a3bfaf7fae74'),  -- Transistor 2N2222A
+    ('944a49f1-f1c0-41e7-a432-a2f7973ca693',  5,   25.00, 'e20c3e29-8faf-4bd3-afa7-a3b295b965ce', 'a81396a1-7ff9-470b-b82d-a3bfaf7fae74'),  -- CI 555
+ 
+    -- fae75 | Gerardo Flores Ramos (total productos: 1024.95)
+    ('944a49f1-f1c0-41e7-a432-a2f7973ca694',  5,  629.95, '8306300e-9b9b-4e59-bb79-fc394e566cf4', 'a81396a1-7ff9-470b-b82d-a3bfaf7fae75'),  -- Blue Pill
+    ('944a49f1-f1c0-41e7-a432-a2f7973ca695',  2,  190.00, 'e20c3e29-8faf-4bd3-afa7-a3b295b965df', 'a81396a1-7ff9-470b-b82d-a3bfaf7fae75'),  -- Bluetooth HC-05
+    ('944a49f1-f1c0-41e7-a432-a2f7973ca696',  3,  135.00, 'e20c3e29-8faf-4bd3-afa7-a3b295b965db', 'a81396a1-7ff9-470b-b82d-a3bfaf7fae75'),  -- Convertidor LM2596
+    ('944a49f1-f1c0-41e7-a432-a2f7973ca697',  2,   70.00, 'e20c3e29-8faf-4bd3-afa7-a3b295b965e0', 'a81396a1-7ff9-470b-b82d-a3bfaf7fae75'),  -- Ventilador DC 12V
+ 
+    -- fae76 | Valeria Herrera Salazar (total productos: 32999.00)
+    ('944a49f1-f1c0-41e7-a432-a2f7973ca698',  1, 32999.00, '4a59bd7d-4d9d-4b7a-9ca4-4281c07b7095', 'a81396a1-7ff9-470b-b82d-a3bfaf7fae76'), -- Galaxy S26 Ultra
+ 
+    -- fae77 | Carmen Cortes Vargas (total productos: 15124.99)
+    ('944a49f1-f1c0-41e7-a432-a2f7973ca699',  1, 14999.00, '94b016d4-f851-4867-87ff-5f54f66c81da', 'a81396a1-7ff9-470b-b82d-a3bfaf7fae77'), -- macbook neo
+    ('944a49f1-f1c0-41e7-a432-a2f7973ca69a',  1,   125.99, '8306300e-9b9b-4e59-bb79-fc394e566cf4', 'a81396a1-7ff9-470b-b82d-a3bfaf7fae77'), -- Blue Pill
+ 
+    -- fae78 | Andres Reyes Navarrete (total productos: 15399.00)
+    ('944a49f1-f1c0-41e7-a432-a2f7973ca69b',  1, 15399.00, '94b016d4-f851-4867-87ff-5f54f66c81db', 'a81396a1-7ff9-470b-b82d-a3bfaf7fae78'), -- elitebook 845 G8
+ 
+    -- fae79 | Gerardo Vargas Diaz (total productos: 714.00)
+    ('944a49f1-f1c0-41e7-a432-a2f7973ca69c',  2,   714.00, '8306300e-9b9b-4e59-bb79-fc394e566cf2', 'a81396a1-7ff9-470b-b82d-a3bfaf7fae79'), -- ESP32
+ 
+    -- fae7a | Laura Sanchez Rodriguez (total productos: 31999.00)
+    ('944a49f1-f1c0-41e7-a432-a2f7973ca69d',  1, 31999.00, '4a59bd7d-4d9d-4b7a-9ca4-4281c07b7093', 'a81396a1-7ff9-470b-b82d-a3bfaf7fae7a'), -- iphone 18 pro max
+ 
+    -- fae7b | Hector Cruz Jimenez (total productos: 3570.00)
+    ('944a49f1-f1c0-41e7-a432-a2f7973ca69e', 10,  3570.00, '8306300e-9b9b-4e59-bb79-fc394e566cf2', 'a81396a1-7ff9-470b-b82d-a3bfaf7fae7b'), -- ESP32
+ 
+    -- fae7c | Andrea Cruz Hernandez (total productos: 47999.00)
+    ('944a49f1-f1c0-41e7-a432-a2f7973ca69f',  1, 47999.00, '4a59bd7d-4d9d-4b7a-9ca4-4281c07b7094', 'a81396a1-7ff9-470b-b82d-a3bfaf7fae7c'), -- iphone duo
+ 
+    -- fae7d | Marta Sanchez Gonzalez (total productos: 15399.00)
+    ('944a49f1-f1c0-41e7-a432-a2f7973ca6a0',  1, 15399.00, '94b016d4-f851-4867-87ff-5f54f66c81db', 'a81396a1-7ff9-470b-b82d-a3bfaf7fae7d')  -- elitebook 845 G8
+;
+ 
+/*
+    envios
+    (fecha de "hoy" en el escenario: 2026-10-26)
+*/
+INSERT INTO envios (id, fecha, fecha_entrega, estado, numero_seguimiento, domicilios_id, pedidos_id) VALUES
+    -- Jorge Morales Romero (La Piedad)
+    ('3fe0e6c3-1920-4d80-ba1c-599df0d200f8', '2026-10-05 09:10:00-06', '2026-10-07 14:25:37-06', 'ENTREGADO',  '17877991805734474401', '0d596de4-f3a7-4989-8ec7-f7d2d11b3126', 'a81396a1-7ff9-470b-b82d-a3bfaf7fae73'),
+    -- Fernando Martinez Perez (Penjamo)
+    ('3fe0e6c3-1920-4d80-ba1c-599df0d200f9', '2026-10-08 10:30:00-06', '2026-10-12 11:48:26-06', 'ENTREGADO',  '17877991805734474402', '0d596de4-f3a7-4989-8ec7-f7d2d11b3135', 'a81396a1-7ff9-470b-b82d-a3bfaf7fae74'),
+    -- Gerardo Flores Ramos (Guadalajara)
+    ('3fe0e6c3-1920-4d80-ba1c-599df0d200fa', '2026-10-12 10:05:00-06', '2026-10-14 16:32:09-06', 'ENTREGADO',  '17877991805734474403', '0d596de4-f3a7-4989-8ec7-f7d2d11b3132', 'a81396a1-7ff9-470b-b82d-a3bfaf7fae75'),
+    -- Valeria Herrera Salazar (La Piedad)
+    ('3fe0e6c3-1920-4d80-ba1c-599df0d200fb', '2026-10-13 09:40:00-06', '2026-10-15 12:18:44-06', 'ENTREGADO',  '17877991805734474404', '0d596de4-f3a7-4989-8ec7-f7d2d11b3124', 'a81396a1-7ff9-470b-b82d-a3bfaf7fae76'),
+    -- Carmen Cortes Vargas (La Piedad)
+    ('3fe0e6c3-1920-4d80-ba1c-599df0d200fc', '2026-10-15 11:20:00-06', '2026-10-16 15:07:31-06', 'ENTREGADO',  '17877991805734474405', '0d596de4-f3a7-4989-8ec7-f7d2d11b3123', 'a81396a1-7ff9-470b-b82d-a3bfaf7fae77'),
+    -- Andres Reyes Navarrete (Penjamo) - pedido sin pagar, cancelado
+    ('3fe0e6c3-1920-4d80-ba1c-599df0d200fd', '2026-10-19 08:00:00-06', NULL,                     'CANCELADO',  '17877991805734474406', '0d596de4-f3a7-4989-8ec7-f7d2d11b3128', 'a81396a1-7ff9-470b-b82d-a3bfaf7fae78'),
+    -- Gerardo Vargas Diaz (La Piedad)
+    ('3fe0e6c3-1920-4d80-ba1c-599df0d200fe', '2026-10-19 09:50:00-06', '2026-10-21 13:15:52-06', 'ENTREGADO',  '17877991805734474407', '0d596de4-f3a7-4989-8ec7-f7d2d11b3121', 'a81396a1-7ff9-470b-b82d-a3bfaf7fae79'),
+    -- Laura Sanchez Rodriguez (La Piedad)
+    ('3fe0e6c3-1920-4d80-ba1c-599df0d200ff', '2026-10-20 10:15:00-06', NULL,                     'EN_TRANSITO','17877991805734474408', '0d596de4-f3a7-4989-8ec7-f7d2d11b3130', 'a81396a1-7ff9-470b-b82d-a3bfaf7fae7a'),
+    -- Hector Cruz Jimenez (Penjamo)
+    ('3fe0e6c3-1920-4d80-ba1c-599df0d20100', '2026-10-22 11:00:00-06', NULL,                     'EN_TRANSITO','17877991805734474409', '0d596de4-f3a7-4989-8ec7-f7d2d11b3122', 'a81396a1-7ff9-470b-b82d-a3bfaf7fae7b'),
+    -- Andrea Cruz Hernandez (La Piedad)
+    ('3fe0e6c3-1920-4d80-ba1c-599df0d20101', '2026-10-26 08:45:00-06', NULL,                     'PENDIENTE',  '17877991805734474410', '0d596de4-f3a7-4989-8ec7-f7d2d11b3133', 'a81396a1-7ff9-470b-b82d-a3bfaf7fae7c'),
+    -- Marta Sanchez Gonzalez (Guadalajara)
+    ('3fe0e6c3-1920-4d80-ba1c-599df0d20102', '2026-10-26 09:10:00-06', NULL,                     'PENDIENTE',  '17877991805734474411', '0d596de4-f3a7-4989-8ec7-f7d2d11b3125', 'a81396a1-7ff9-470b-b82d-a3bfaf7fae7d')
+;
