@@ -247,3 +247,16 @@ INSERT INTO detalles_pedido (id, cantidad, precio, productos_id, pedidos_id) VAL
 INSERT INTO envios (id, fecha, fecha_entrega, estado, numero_seguimiento, domicilios_id, pedidos_id) VALUES
     ('3fe0e6c3-1920-4d80-ba1c-599df0d200f7', '2026-10-02 17:10:00-01', '2026-10-05 12:39:05-01', 'ENTREGADO', '17877991805734474337', '0d596de4-f3a7-4989-8ec7-f7d2d11b3125', 'a81396a1-7ff9-470b-b82d-a3bfaf7fae71')
 ;
+
+-- Pedido del usuario 'Andrés Reyes Navarrete' con UUID '9170894f-691d-4590-b46b-e1d2f6ca0a86'
+INSERT INTO pedidos (id, fecha, importe_productos, importe_envio, fecha_hora_pago, metodos_pago_id, usuarios_id) VALUES
+    ('a81396a1-7ff9-470b-b82d-a3bfaf7fae72', '2026-10-02 13:39:19-01', 32058, 59, '2026-10-05 17:00:09-01', 'f9ead6e0-d81d-4e8d-8c55-f52f479f8ad1', '9170894f-691d-4590-b46b-e1d2f6ca0a86')
+;
+
+INSERT INTO detalles_pedido (cantidad, precio, productos_id, pedidos_id) VALUES
+    (1, 31999, '4a59bd7d-4d9d-4b7a-9ca4-4281c07b7093', 'a81396a1-7ff9-470b-b82d-a3bfaf7fae72')
+;
+
+INSERT INTO envios (fecha, fecha_entrega, estado, numero_seguimiento, domicilios_id, pedidos_id) VALUES
+    ('2026-10-02 17:10:00-01', '2026-10-05 12:39:05-01', 'ENTREGADO', '17877991805734474338', '0d596de4-f3a7-4989-8ec7-f7d2d11b3128', 'a81396a1-7ff9-470b-b82d-a3bfaf7fae72')
+;

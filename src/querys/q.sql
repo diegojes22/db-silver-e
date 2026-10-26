@@ -21,7 +21,7 @@ SELECT
     dom.estado
 FROM usuarios usr
 JOIN domicilios dom ON usr.id = dom.usuarios_id
-WHERE usr.nombre LIKE 'Marta Sánchez González';
+WHERE usr.nombre LIKE 'Andrés Reyes Navarrete';
 
 -- Usuarios sin domicilio
 SELECT 
@@ -46,7 +46,8 @@ ORDER BY total DESC;
 */
 
 -- Lista de pedidos realizados
-SELECT 
+SELECT
+    pd.id,
     usr.nombre,
     usr.telefono,
     pd.numero,
@@ -70,7 +71,44 @@ SELECT
 FROM pedidos pd
 JOIN detalles_pedido dpd ON pd.id = dpd.pedidos_id
 JOIN productos pro ON pro.id = dpd.productos_id
-WHERE pd.id = 'a81396a1-7ff9-470b-b82d-a3bfaf7fae70';
+WHERE pd.id = 'a81396a1-7ff9-470b-b82d-a3bfaf7fae72';
+
+-- Cantidad de compras por producto
+SELECT 
+    pro.nombre,
+    SUM(dp.cantidad) as cantidad,
+    SUM(pro.precio * dp.cantidad)as total_vendido
+FROM productos pro
+JOIN detalles_pedido dp ON pro.id = dp.productos_id
+JOIN pedidos p ON p.id = dp.pedidos_id
+JOIN envios en ON p.id = en.pedidos_id
+WHERE en.estado = 'ENTREGADO'
+GROUP BY pro.nombre
+ORDER BY total_vendido DESC, cantidad DESC
+;
+
+-- Producto mas vendido
+SELECT 
+    pro.nombre,
+    SUM(dp.cantidad) as cantidad
+FROM productos pro
+JOIN detalles_pedido dp ON pro.id = dp.productos_id
+JOIN pedidos p ON p.id = dp.pedidos_id
+JOIN envios en ON p.id = en.pedidos_id
+WHERE en.estado = 'ENTREGADO'
+GROUP BY pro.nombre
+ORDER BY cantidad DESC
+LIMIT 1
+;
+
+-- Productos sin ventas
+SELECT 
+    pro.nombre
+FROM productos pro
+LEFT JOIN detalles_pedido dp ON pro.id = dp.productos_id
+WHERE dp.id IS NULL
+GROUP BY pro.nombre
+;
 
 -- Envios entregados
 SELECT 
