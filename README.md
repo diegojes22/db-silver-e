@@ -47,9 +47,10 @@ git commit -m '<descripcion muy breve del cambio> . <fecha del cambio usando num
 ./
   models/           # Diagramas de modelado de la base de datos
   src/              
-    db/             # Scripts de creacion para la DB (para MySQL y Postgres)
+    schema/         # Scripts de creacion para la DB (para MySQL y Postgres)
     insert/         # Insercion de registros e informacion en la DB
     querys/         # Consultas de validacion
+  skills/           # Skills para el manejo de Postgres por parte de la IA
 ```
 
 ## Sobre este trabajo
