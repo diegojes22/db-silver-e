@@ -26,7 +26,7 @@ Crear la DB en una instancia local:
 
 /* Crear enums */
 CREATE TYPE estados_envios AS ENUM ('PENDIENTE', 'EN_TRANSITO', 'ENTREGADO', 'CANCELADO');
-CREATE TYPE generos AS ENUM ('MASCULINO', 'FEMENINO', 'NO_BINARIE');                        -- Espero que esto no genere polemica >:/
+CREATE TYPE generos AS ENUM ('H', 'M');                        -- Espero que esto no genere polemica >:/
 
 /* Crear entidades fuertes */
 CREATE TABLE public.categorias (
@@ -37,10 +37,10 @@ CREATE TABLE public.categorias (
 
 CREATE TABLE public.usuarios (
   id uuid NOT NULL DEFAULT gen_random_uuid(),
-  nombre VARCHAR(60) varying NOT NULL,
+  nombre VARCHAR(60) NOT NULL,
   email character varying NOT NULL UNIQUE,
-  telefono character NOT NULL,
-  sexo USER-DEFINED NOT NULL,
+  telefono VARCHAR(15) NOT NULL,
+  sexo "generos" NOT NULL,
   fecha_nacimiento date NOT NULL,
   contrasena VARCHAR(64) NOT NULL,        
   fecha_registro timestamp with time zone NOT NULL DEFAULT now(),
@@ -75,9 +75,9 @@ CREATE TABLE public.productos (
 CREATE TABLE public.domicilios (
   id uuid NOT NULL DEFAULT gen_random_uuid(),
   calle character varying NOT NULL,
-  numero character varying NOT NULL,
+  numero varchar(10) varying NOT NULL,
   colonia character varying NOT NULL,
-  cp character NOT NULL,
+  cp VARCHAR(5) NOT NULL,
   estado character varying NOT NULL,
   ciudad character varying NOT NULL,
   usuarios_id uuid NOT NULL,
@@ -128,8 +128,8 @@ CREATE TABLE public.envios (
   id uuid NOT NULL DEFAULT gen_random_uuid(),
   fecha_entrega timestamp with time zone,
   fecha timestamp with time zone NOT NULL DEFAULT now(),
-  estado USER-DEFINED NOT NULL DEFAULT 'PENDIENTE'::estado_envio,
-  numero_seguimiento character varying NOT NULL UNIQUE,
+  estado "estados_envios" NOT NULL DEFAULT 'PENDIENTE'::"estados_envios",
+  numero_seguimiento VARCHAR(20) NOT NULL UNIQUE,
   domicilios_id uuid NOT NULL,
   pedidos_id uuid NOT NULL,
   CONSTRAINT envios_pkey PRIMARY KEY (id),
