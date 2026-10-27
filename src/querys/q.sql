@@ -1,4 +1,14 @@
 /*
+Silver Team
+
+PostgreSQL AND Supabase : Database - e-commerce
+*********************************************************************
+
+Consultas de validacion en general del modelo de la base de datos
+*/
+
+
+/*
     Consultas de domicilios
 */
 -- domicilios de los usuarios

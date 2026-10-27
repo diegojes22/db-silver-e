@@ -222,11 +222,11 @@ INSERT INTO detalles_carrito (cantidad, precio, productos_id, usuarios_id) VALUE
 
 -- Primer pedido del usuario 'Gerardo Vargas Díaz' con uuid '9170894f-691d-4590-b46b-e1d2f6ca0a80', 
 INSERT INTO pedidos (id, fecha, importe_productos, importe_envio, fecha_hora_pago, metodos_pago_id, usuarios_id) VALUES
-    ('a81396a1-7ff9-470b-b82d-a3bfaf7fae70', '2026-10-01 13:30:21-05', 124, 0, '2026-10-01 13:30:23-09', 'f9ead6e0-d81d-4e8d-8c55-f52f479f8ad2', '9170894f-691d-4590-b46b-e1d2f6ca0a80')
+    ('a81396a1-7ff9-470b-b82d-a3bfaf7fae70', '2026-10-01 13:30:21-05', 213, 0, '2026-10-01 13:30:23-09', 'f9ead6e0-d81d-4e8d-8c55-f52f479f8ad2', '9170894f-691d-4590-b46b-e1d2f6ca0a80')
 ;
 
 INSERT INTO detalles_pedido (id, cantidad, precio, productos_id, pedidos_id) VALUES
-    ('944a49f1-f1c0-41e7-a432-a2f7973ca680', 10,        15.0,       'e20c3e29-8faf-4bd3-afa7-a3b295b965d1', 'a81396a1-7ff9-470b-b82d-a3bfaf7fae70'),  -- LED ROJO
+    ('944a49f1-f1c0-41e7-a432-a2f7973ca680', 10,        1.50,       'e20c3e29-8faf-4bd3-afa7-a3b295b965d1', 'a81396a1-7ff9-470b-b82d-a3bfaf7fae70'),  -- LED ROJO
     ('944a49f1-f1c0-41e7-a432-a2f7973ca681',  1,        20.0,       'e20c3e29-8faf-4bd3-afa7-a3b295b965cd', 'a81396a1-7ff9-470b-b82d-a3bfaf7fae70'),  -- Transistor 2N2222A
     ('944a49f1-f1c0-41e7-a432-a2f7973ca682',  2,        89.0,       'e20c3e29-8faf-4bd3-afa7-a3b295b965cf', 'a81396a1-7ff9-470b-b82d-a3bfaf7fae70')   -- Protoboard
 ;
@@ -237,7 +237,7 @@ INSERT INTO envios (id, fecha, fecha_entrega, estado, numero_seguimiento, domici
 
 -- Pedido del usuario 'Marta Sánchez González' con UUID '9170894f-691d-4590-b46b-e1d2f6ca0a84'
 INSERT INTO pedidos (id, fecha, importe_productos, importe_envio, fecha_hora_pago, metodos_pago_id, usuarios_id) VALUES
-    ('a81396a1-7ff9-470b-b82d-a3bfaf7fae71', '2026-10-01 17:09:15-01', 32058, 59, '2026-10-01 17:15:57-01', 'f9ead6e0-d81d-4e8d-8c55-f52f479f8ad1', '9170894f-691d-4590-b46b-e1d2f6ca0a84')
+    ('a81396a1-7ff9-470b-b82d-a3bfaf7fae71', '2026-10-01 17:09:15-01', 31999, 59, '2026-10-01 17:15:57-01', 'f9ead6e0-d81d-4e8d-8c55-f52f479f8ad1', '9170894f-691d-4590-b46b-e1d2f6ca0a84')
 ;
 
 INSERT INTO detalles_pedido (id, cantidad, precio, productos_id, pedidos_id) VALUES
@@ -250,7 +250,7 @@ INSERT INTO envios (id, fecha, fecha_entrega, estado, numero_seguimiento, domici
 
 -- Pedido del usuario 'Andrés Reyes Navarrete' con UUID '9170894f-691d-4590-b46b-e1d2f6ca0a86'
 INSERT INTO pedidos (id, fecha, importe_productos, importe_envio, fecha_hora_pago, metodos_pago_id, usuarios_id) VALUES
-    ('a81396a1-7ff9-470b-b82d-a3bfaf7fae72', '2026-10-02 13:39:19-01', 32058, 59, '2026-10-05 17:00:09-01', 'f9ead6e0-d81d-4e8d-8c55-f52f479f8ad1', '9170894f-691d-4590-b46b-e1d2f6ca0a86')
+    ('a81396a1-7ff9-470b-b82d-a3bfaf7fae72', '2026-10-02 13:39:19-01', 31999, 59, '2026-10-05 17:00:09-01', 'f9ead6e0-d81d-4e8d-8c55-f52f479f8ad1', '9170894f-691d-4590-b46b-e1d2f6ca0a86')
 ;
 
 INSERT INTO detalles_pedido (cantidad, precio, productos_id, pedidos_id) VALUES
@@ -375,3 +375,5 @@ INSERT INTO envios (id, fecha, fecha_entrega, estado, numero_seguimiento, domici
     -- Marta Sanchez Gonzalez (Guadalajara)
     ('3fe0e6c3-1920-4d80-ba1c-599df0d20102', '2026-10-26 09:10:00-06', NULL,                     'PENDIENTE',  '17877991805734474411', '0d596de4-f3a7-4989-8ec7-f7d2d11b3125', 'a81396a1-7ff9-470b-b82d-a3bfaf7fae7d')
 ;
+
+-- a81396a1-7ff9-470b-b82d-a3bfaf7fae7b
