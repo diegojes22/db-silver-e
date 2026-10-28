@@ -71,6 +71,103 @@ crear el pedido.
 
 Pendiente verificar!
 */
+-- Pedidos cuyas fecha de envio sean anteriores a la fecha de creacion de un pedido
+SELECT
+  *
+FROM pedidos p
+JOIN envios e ON p.id = e.pedios_id
+WHERE e.fecha_entrega <= p.fecha
+;
+
+-- Pedidos cuyas fechas de pagos sean anteriores a la fecha de creacion del pedido
+SELECT
+  *
+FROM pedidos p
+WHERE e.fecha_entrega <= p.fecha
+;
+
+-- Pedidos cuya fecha de creacion de envio sea posterior a la fecha de pago del pedido
+SELECT
+  id,
+  fecha,
+  fecha_hora_pago,
+  (fecha - fecha_hora_pago) AS diferencia
+FROM pedidos p
+WHERE (fecha_hora_pago <= fecha)
+;
+
+-- Diferencia entre las fecha de entrega y fecha de creacio del pedido
+-- unicamente de los pedidos que si fueron entregados.
+SELECT
+  p.id,
+  e.numero_seguimiento,
+  p.fecha,
+  p.fecha_hora_pago,
+  e.fecha,
+  e.fecha_entrega,
+  (e.fecha_entrega - p.fecha) AS diferencia
+FROM pedidos p
+JOIN envios e ON p.id = e.pedidos_id
+WHERE e.estado = 'ENTREGADO'
+;
+
+-- Pedidos cuyas entregas sean en el mismo dia en que se realizo
+SELECT
+  p.id,
+  e.numero_seguimiento,
+  p.fecha,
+  p.fecha_hora_pago,
+  e.fecha,
+  e.fecha_entrega,
+  (e.fecha_entrega - p.fecha) AS diferencia
+FROM pedidos p
+JOIN envios e ON p.id = e.pedidos_id
+WHERE e.estado = 'ENTREGADO'
+;
+
+-- Pedidos cuyas fechas de pago que no superen la hora
+SELECT
+  id,
+  fecha,
+  fecha_hora_pago,
+  (fecha_hora_pago - fecha) AS diferencia
+FROM pedidos p
+WHERE 
+  (fecha_hora_pago IS NOT NULL) AND
+  (fecha_hora_pago - fecha) <= '00:59:59' 
+;
+
+-- Pedidos cuyas fechas de pago que si superen la hora
+-- y obtener su metodo de pago
+SELECT
+  p.id,
+  fecha,
+  fecha_hora_pago,
+  (fecha_hora_pago - fecha) AS diferencia,
+  pay.nombre
+FROM pedidos p
+JOIN metodos_pago pay ON pay.id = p.metodos_pago_id
+WHERE 
+  (fecha_hora_pago IS NOT NULL) AND
+  (fecha_hora_pago - fecha) > '00:59:59' 
+;
+
+-- Pedidos cuyas fechas de entrega sean previas a un dia
+SELECT
+  p.id,
+  e.numero_seguimiento,
+  p.fecha,
+  p.fecha_hora_pago,
+  e.fecha,
+  e.fecha_entrega,
+  (e.fecha_entrega - p.fecha) AS diferencia
+FROM pedidos p
+JOIN envios e ON p.id = e.pedidos_id
+WHERE e.estado = 'ENTREGADO' AND (e.fecha_entrega - p.fecha) < '23:59:59'
+;
+
+
+-- Consulta generada
 SELECT p.id AS pedido_id, 'PAGO_ANTES_DE_PEDIDO' AS anomalia,
        p.fecha AS fecha_referencia, p.fecha_hora_pago AS fecha_conflicto
 FROM pedidos p
